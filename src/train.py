@@ -14,7 +14,7 @@ num_epochs = 3
 learning_rate = 2e-5
 
 # Prepare StrategyQA dataset
-train_dataset = StrategyQADataset(tokenizer, train=True)
+train_dataset = StrategyQADataset('data/train.json', tokenizer)
 train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 
 # Define optimizer and scheduler

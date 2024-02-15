@@ -17,6 +17,6 @@ with open(json_file, encoding="utf8") as f:
 dataset = StrategyQADataset(json_file, tokenizer)
 
 # Access a sample from the dataset
-print(f"{dataset.data[0]['evidence']}")
-print(f"{dataset.data[0]['evidence'][0]}")
-print(f"{dataset.data[0]['evidence'][0][1][0]}")
+print(f"{dataset[0]['encoded_evidence']}")
+# print(f"{dataset.data[0]['evidence'][0]}")
+# print(f"{dataset.data[0]['evidence'][0][1][0]}")

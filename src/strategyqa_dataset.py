@@ -3,7 +3,7 @@ from torch.utils.data import Dataset
 
 class StrategyQADataset(Dataset):
     def __init__(self, json_file, tokenizer, max_length=512):
-        self.data = json.load(open(json_file, encoding="utf8"))
+        self.data = json.loads(open(json_file, encoding="utf8"))
         self.tokenizer = tokenizer
         self.max_length = max_length
 
