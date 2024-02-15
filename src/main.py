@@ -1,6 +1,6 @@
 from transformers import BertTokenizer
-from strategyqa_dataset import StrategyQADataset
 import json
+from SQP1Dataset import initialize_datasets
 
 # Load tokenizer
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
@@ -11,12 +11,7 @@ lines = []
 with open(json_file, encoding="utf8") as f:
   lines = f.readlines()
 
-# print(lines)
+data = json.load(open(json_file, encoding="utf8"))
+datasets = initialize_datasets('data/train.json', 'data/dev.json', tokenizer)
 
-# Create dataset instance
-dataset = StrategyQADataset(json_file, tokenizer)
-
-# Access a sample from the dataset
-print(f"{dataset[0]['encoded_evidence']}")
-# print(f"{dataset.data[0]['evidence'][0]}")
-# print(f"{dataset.data[0]['evidence'][0][1][0]}")
+print(f"{datasets['train']}")
