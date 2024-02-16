@@ -1,17 +1,19 @@
-from transformers import BertTokenizer
+from transformers import T5Tokenizer, T5Model
 import json
-from SQP1Dataset import initialize_datasets
+from SQP1Dataset import initialize_datasets, SQP1Dataset
+from torch.utils.data import Dataset, DataLoader
 
 # Load tokenizer
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+tokenizer = T5Tokenizer.from_pretrained("t5-base")
 
-# Define file path to your JSON data
-json_file = 'data/train.json'
-lines = []
-with open(json_file, encoding="utf8") as f:
-  lines = f.readlines()
-
-data = json.load(open(json_file, encoding="utf8"))
 datasets = initialize_datasets('data/train.json', 'data/dev.json', tokenizer)
 
-print(f"{datasets['train']}")
+validation_dataloader = DataLoader(datasets['dev'],
+                                   batch_size=64,
+                                   shuffle=False,
+                                   collate_fn=SQP1Dataset.collate_fn)
+
+batch = next(iter(validation_dataloader))
+print(batch)
+
+print(f"{len(datasets['dev'])}")
