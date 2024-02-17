@@ -80,7 +80,7 @@ def convert_to_t5_format(tokenizer, question, decomposition_questions):
     # Define special tokens
     bos_token = tokenizer.bos_token
     eos_token = tokenizer.eos_token
-    pad_token_id = tokenizer.pad_token_id
+    pad_token_id = '<PAD>'
 
     # Concatenate input and output sequences
     inputs = [bos_token] + tokenized_question + [eos_token]
@@ -91,8 +91,8 @@ def convert_to_t5_format(tokenizer, question, decomposition_questions):
     max_length = max(len(inputs), max(len(target) for target in targets))
 
     # Pad sequences to the same length
-    # inputs = inputs + [pad_token_id] * (max_length - len(inputs))
-    # targets = [target + [pad_token_id] * (max_length - len(target)) for target in targets]
+    inputs = inputs + [pad_token_id] * (max_length - len(inputs))
+    targets = [target + [pad_token_id] * (max_length - len(target)) for target in targets]
 
     # Convert tokens to token IDs
     input_ids = tokenizer.convert_tokens_to_ids(inputs)

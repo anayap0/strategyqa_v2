@@ -10,6 +10,13 @@ from transformers import T5Tokenizer, T5Model
 class SQP2Dataset(Dataset):
     tokenizer: T5Tokenizer = None
 
+    # raw data format:
+    # [{
+        # 'question': str
+        # 'decompositions': [questions],
+        # 'evidence': [array of all paragraph identifiers for question]
+        # 'previous answers': [array of previous answers]
+    # }]
     def __init__(self, raw_data, tokenizer, max_length=512):
         self.data = [SQP2Example.from_dict(data) for data in raw_data]
         SQP2Dataset.tokenizer = tokenizer
