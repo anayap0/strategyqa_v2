@@ -32,13 +32,15 @@ class SQP1Dataset(Dataset):
         questions = [sample.question for sample in batched_samples]
         decomps = ["<SEP>".join(sample.decompositions)
                    for sample in batched_samples]
+        qids = [sample.qid for sample in batched_samples]
+        
 
         input_ids = SQP1Dataset.tokenizer(
             questions, return_tensors="pt", padding=True, truncation=True, max_length=512)
         target_ids = SQP1Dataset.tokenizer(
             decomps, return_tensors="pt", padding=True, truncation=True, max_length=512)
 
-        return {'input_ids': input_ids, 'target_ids': target_ids}
+        return {'input_ids': input_ids, 'target_ids': target_ids, 'questions': questions, 'decomps': decomps, 'qids': qids}
 
 
 def convert_to_t5_format(tokenizer, question, decomposition_questions):
