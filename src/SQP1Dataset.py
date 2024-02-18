@@ -1,6 +1,6 @@
 import json
 from torch.utils.data import Dataset
-from SQP1 import SQP1Example
+from .SQP1 import SQP1Example
 from transformers import AutoTokenizer
 import torch
 from typing import List, Tuple
@@ -34,9 +34,9 @@ class SQP1Dataset(Dataset):
                    for sample in batched_samples]
 
         input_ids = SQP1Dataset.tokenizer(
-            questions, return_tensors="pt", padding=True, truncation=True)
+            questions, return_tensors="pt", padding=True, truncation=True, max_length=512)
         target_ids = SQP1Dataset.tokenizer(
-            decomps, return_tensors="pt", padding=True, truncation=True)
+            decomps, return_tensors="pt", padding=True, truncation=True, max_length=512)
 
         return {'input_ids': input_ids, 'target_ids': target_ids}
 
