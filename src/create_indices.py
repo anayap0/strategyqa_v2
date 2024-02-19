@@ -48,5 +48,5 @@ for l in tqdm(f):
     if file_items_count >= file_limit:
         file_number = file_number + 1
         nf.close()
-        nf = open("datastrategyqa_pyserin_files/{0}.jsonl".format(file_number),"w")
+        nf = open("data/strategyqa_pyserin_files/{0}.jsonl".format(file_number),"w")
         file_items_count = 0
