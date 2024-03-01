@@ -113,10 +113,10 @@ def main(args):
     predictions_file = args.predictions_file
     metrics_output_file = args.metrics_output_file
 
-    with open(golds_file) as infile:
+    with open(golds_file, encoding="utf8") as infile:
         gold_annotations = json.load(infile)
 
-    with open(predictions_file) as infile:
+    with open(predictions_file, encoding="utf8") as infile:
         predictions = json.load(infile)
         if len(gold_annotations) != len(predictions):
             raise Exception(
